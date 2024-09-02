@@ -5,10 +5,11 @@
 function submeter() {
     let nome = document.getElementById("nome").value;
     let cpf = document.getElementById("cpf").value;
-    let idade = document.getElementById("idade").value;
+    let email = document.getElementById("email").value;
     
     //console.log(cpf);
     console.log(validaCPF(cpf));
+    console.log(validaEmail(email));
 }
 
 function validaCPF(cpf) {
@@ -40,4 +41,9 @@ function validaCPF(cpf) {
     // 12345678910
 
     return true;
+}
+
+function validaEmail(email) {
+    return /^[\w]+@[\w]+.[a-zA-Z]+$/.test(email) // \w aceita qualquer letra do alfabeto
+    
 }
