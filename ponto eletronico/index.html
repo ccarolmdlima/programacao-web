@@ -1,22 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <title>Sistema de Ponto Eletrônico</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="data-hora">
-        <p id="data-semana">Segunda-Feira</p>
-        <p id="data-atual">26/08/2024</p>
-        <p id="data-hora">08:37:23</p>
+        <p id="dia-semana"></p>
+        <p id="data-atual"></p>
+        <p id="hora-atual"></p>
     </div>
-    <button class="registro">Registrar Ponto</button>
 
-<script src="JS/script.js">
+    <button id="btn-registrar-ponto">Registrar ponto</button>
 
-</script>
+    <dialog id="dialog-ponto">
+        <p id="dialog-data">Data</p>
+        <p id="dialog-hora">Hora</p>
+        <button id="btn-dialog-entrada">Entrada</button>
+        <button id="btn-dialog-saida">Saída</button>
+        <button id="dialog-fechar">X</button>
+    </dialog>
 
+    <script src="script.js"></script>
 </body>
 </html>

@@ -1,67 +1,69 @@
-// Seleciona os elementos HTML onde os dados serão exibidos
-const diaSemana = document.getElementById("data-semana");
+navigator.geolocation.getCurrentPosition((position) => {
+    console.log(position);
+    console.log(position.coords.latitude);
+    console.log(position.coords.altitude);
+});
+
+const diaSemana = document.getElementById("dia-semana");
 const dataAtual = document.getElementById("data-atual");
-const horaAtual = document.getElementById("data-hora");
+const horaAtual = document.getElementById("hora-atual");
+const btnRegistrarPonto = document.getElementById("btn-registrar-ponto");
 
-// Função para atualizar o conteúdo dos elementos com a data e hora atuais
+btnRegistrarPonto.addEventListener("click", register);
+
+diaSemana.textContent = getWeekDay();
+dataAtual.textContent = getCurrentDate();
+
+const dialogPonto = document.getElementById("dialog-ponto");
+dialogPonto.showModal();
+
+const dialogData = document.getElementById("dialog-data");
+dialogData.textContent = getCurrentDate();
+
+const dialogHora = document.getElementById("dialog-hora");
+dialogHora.textContent = getCurrentTime();
+
+const btnDialogFechar = document.getElementById("dialog-fechar");
+btnDialogFechar.addEventListener("click", () => {
+    dialogPonto.close();
+})
+
+
+function register() {
+    //abrir dialog em ponto modal
+    //dialog é o elemento dialogPonto
+    //e o método que abre o dialog em estilo modal é o showDialog()
+    dialogPonto.showModal();
+}
+
+
 function updateContentHour() {
-
-    // Atualiza o texto do elemento diaSemana com o dia da semana atual
-    if (diaSemana) {
-        diaSemana.textContent = getWeekDay();
-    }
-
-    // Atualiza o texto do elemento dataAtual com a data atual
-    if (dataAtual) {
-        dataAtual.textContent = getCurrentDate();
-    }
-
-    // Atualiza o texto do elemento horaAtual com a hora atual
-    if (horaAtual) {
-        horaAtual.textContent = getCurrentTime();
-    }
+    horaAtual.textContent = getCurrentTime();
 }
 
-// Retorna a hora atual no formato HH:MM:SS, com dois dígitos para horas, minutos e segundos
+// Retorna a hora atual (hora/minuto/segundo)
 function getCurrentTime() {
-
-    const date = new Date(); // Cria um novo objeto Date com a data e hora atuais
-
-    // Formata as horas, minutos e segundos com dois dígitos
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    const seconds = String(date.getSeconds()).padStart(2, '0');
-
-    // Retorna a hora no formato HH:MM:SS
-    return hours + ":" + minutes + ":" + seconds;
+    const date = new Date();
+    return String(date.getHours()).padStart(2, '0') + ":" + String(date.getMinutes()).padStart(2, '0') + ":" + String(date.getSeconds()).padStart(2, '0');
 }
 
-// Retorna a data atual no formato DD/MM/AAAA, com zeros à esquerda para dias e meses
+// Retorna a data atual no padrão dd/mm/aaaa
 function getCurrentDate() {
-
-    const date = new Date(); // Cria um novo objeto Date com a data e hora atuais
-
-    // Formata o dia e o mês com dois dígitos
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear(); // Obtém o ano completo
-
-    // Retorna a data no formato DD/MM/AAAA
-    return day + "/" + month + "/" + year;
+    const date = new Date(); 
+    let mes = date.getMonth() + 1;
+    return String(date.getDate()).padStart(2, '0') + "/" + String(mes).padStart(2, '0') + "/" +  String(date.getFullYear()).padStart(2, '0');
 }
 
-// Retorna o dia da semana atual como uma string com um número e o nome do dia
 function getWeekDay() {
-    
-    // Array com os nomes dos dias da semana e seus respectivos números
-    const daysOfWeek = ["0 - Domingo", "1 - Segunda", "2 - Terça", "3 - Quarta", "4 - Quinta", "5 - Sexta", "6 - Sábado"];
-    const date = new Date(); // Cria um novo objeto Date com a data e hora atuais
-    // Obtém o número do dia da semana e retorna o nome correspondente
-    return daysOfWeek[date.getDay()];
+    const date = new Date()
+    const day = date.getDay()
+    const daynames = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
+    return daynames[day]
 }
 
-// Atualiza o conteúdo dos elementos a cada 1000 milissegundos (1 segundo)
+updateContentHour();
 setInterval(updateContentHour, 1000);
 
-// Atualiza imediatamente o conteúdo dos elementos ao carregar a página, sem esperar 1 segundo
-updateContentHour();
+console.log(getCurrentTime());
+console.log(getCurrentDate());
+console.log(getWeekDay());
