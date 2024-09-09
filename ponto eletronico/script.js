@@ -1,9 +1,3 @@
-navigator.geolocation.getCurrentPosition((position) => {
-    console.log(position);
-    console.log(position.coords.latitude);
-    console.log(position.coords.altitude);
-});
-
 const diaSemana = document.getElementById("dia-semana");
 const dataAtual = document.getElementById("data-atual");
 const horaAtual = document.getElementById("hora-atual");
@@ -14,8 +8,8 @@ btnRegistrarPonto.addEventListener("click", register);
 diaSemana.textContent = getWeekDay();
 dataAtual.textContent = getCurrentDate();
 
+
 const dialogPonto = document.getElementById("dialog-ponto");
-dialogPonto.showModal();
 
 const dialogData = document.getElementById("dialog-data");
 dialogData.textContent = getCurrentDate();
@@ -23,16 +17,71 @@ dialogData.textContent = getCurrentDate();
 const dialogHora = document.getElementById("dialog-hora");
 dialogHora.textContent = getCurrentTime();
 
+
+const btnDialogEntrada = document.getElementById("btn-dialog-entrada");
+btnDialogEntrada.addEventListener("click", () => {
+
+    let currentDate = getCurrentDate();
+    let currentTime = getCurrentTime();
+    let userLocation = getUserLocation();
+
+    ponto = {
+        "date": currentDate,
+        "time": currentTime,
+        "location": userLocation,
+        "id": 1,
+        "type": "entrada"
+    }
+
+    console.log(ponto);
+})
+
+const btnDialogSaida = document.getElementById("btn-dialog-saida");
+btnDialogSaida.addEventListener("click", () => {
+
+    let currentDate = getCurrentDate();
+    let currentTime = getCurrentTime();
+    let userLocation = getUserLocation();
+
+    ponto = {
+        "date": currentDate,
+        "time": currentTime,
+        "location": userLocation,
+        "id": 1,
+        "type": "saida"
+    }
+
+    console.log(ponto);
+})
+
+function getObjectRegister(registerType) {
+    ponto = {
+        "date": getCurrentDate(),
+        "time": getCurrentTime(),
+        "location": getUserLocation(),
+        "id": 1,
+        "type": registerType
+    }
+    return ponto
+
+}
+
 const btnDialogFechar = document.getElementById("dialog-fechar");
 btnDialogFechar.addEventListener("click", () => {
     dialogPonto.close();
 })
 
+function getUserLocation() {
+    navigator.geolocation.getCurrentPosition((position) => {
+        userLocation  = {
+            "lat": position.coords.latitude,
+            "long": position.coords.longitude
+        }
+        return userLocation
+    });
+}
 
 function register() {
-    //abrir dialog em ponto modal
-    //dialog é o elemento dialogPonto
-    //e o método que abre o dialog em estilo modal é o showDialog()
     dialogPonto.showModal();
 }
 
