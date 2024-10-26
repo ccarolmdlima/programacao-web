@@ -7,31 +7,42 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="data-hora">
-        <p id="dia-semana"></p>
-        <p id="data-atual"></p>
-        <p id="hora-atual"></p>
-    </div>
-    <button id="btn-registrar-ponto">Registrar ponto</button>
+    
+    <header class="header">
+        <h1 class="titulo">Sistema de Ponto Eletrônico</h1>
+    </header>
 
-    <dialog id="dialog-ponto">
-        <p id="dialog-data">Data</p>
-        <p id="dialog-hora">Hora</p>
-        <select name="register-type" id="register-type">
+    <main class="container">
+        <section class="data-hora">
+            <p id="dia-semana" class="data-hora__item"></p>
+            <p id="data-atual" class="data-hora__item"></p>
+            <p id="hora-atual" class="data-hora__item"></p>
+        </section>
+
+        <section class="controle-ponto">
+            <button id="btn-registrar-ponto" class="btn">Registrar Ponto</button>
+        </section>
+    </main>
+
+    <dialog id="dialog-ponto" class="dialog">
+        <button id="dialog-fechar" class="dialog__fechar">X</button>
+        <h2 class="dialog__titulo">Registrar Ponto</h2>
+        <p id="dialog-data" class="dialog__item"></p>
+        <p id="dialog-hora" class="dialog__item"></p>
+        <label for="register-type" class="dialog__label">Tipo de Registro:</label>
+        <select name="register-type" id="register-type" class="dialog__select">
             <option value="entrada">Entrada</option>
             <option value="intervalo">Intervalo</option>
             <option value="volta-intervalo">Volta Intervalo</option>
             <option value="saida">Saída</option>
         </select>
-        <button id="btn-dialog-register">Registrar</button>
-        <!-- 
-        <button id="btn-dialog-entrada">Entrada</button>
-        <button>Intervalo</button>
-        <button>Volta Intervalo</button>
-        <button id="btn-dialog-saida">Saída</button>
-        -->
-        <button id="dialog-fechar">X</button>
+        <button id="btn-dialog-register" class="btn dialog__btn">Registrar</button>
+        <p id="dialog-ultimo-registro" class="dialog__item"></p>
     </dialog>
+
+    <div id="alerta-ponto-registrado" class="alerta hidden">
+        <p>Ponto registrado com sucesso!</p>
+    </div>
 
     <script src="script.js"></script>
 </body>
